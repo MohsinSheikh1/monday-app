@@ -31,8 +31,7 @@ const App = () => {
   Let's start building your amazing app, which will change the world!`;
 
   return (
-    <div className="App">
-      <h2>Export "New Board"</h2>
+    <div className="flex items-center justify-center h-screen w-screen bg-[#181B34]">
       <Export />
     </div>
   );
