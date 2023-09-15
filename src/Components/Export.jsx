@@ -1,6 +1,8 @@
 import React from 'react'
 
 import { Checkbox } from 'monday-ui-react-core';
+import "monday-ui-react-core/tokens";
+import { Text } from 'monday-ui-react-core';
 
 const Export = () => {
     return (
@@ -8,16 +10,16 @@ const Export = () => {
             <h1 className='font-bold text-4xl text-white'>Export to PDF</h1>
             <div>
                 <Checkbox
-                    CheckboxClassName='text-white'
-                    label="Include Updates"
+                    labelClassName='text-color-on-inverted'
+                    label={<Text color='onPrimary'>Include Updates</Text>}
                 />
                 <Checkbox
-                    CheckboxClassName='text-white'
-                    label="Include SubItems"
+                    labelClassName='text-color-on-inverted'
+                    label={<Text color='onPrimary'>Include SubItems</Text>}
                 />
                 <Checkbox
-                    labelClassName='primary-text-color'
-                    label="Send a copy to my email"
+                    labelClassName='text-color-on-inverted'
+                    label={<Text color='onPrimary'>Send a copy to my email</Text>}
                 />
             </div>
 
