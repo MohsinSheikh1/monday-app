@@ -4,11 +4,10 @@ import axios from "axios";
 
 import { Checkbox } from "monday-ui-react-core";
 
-const Export = ({ monday }) => {
+const Export = () => {
   return (
     <div className="flex flex-col items-start justify-between h-[50%] w-[50%]">
       <h1 className="font-bold text-4xl text-white">Export to PDF</h1>
-
       <div>
         <Checkbox CheckboxClassName="text-white" label="Include Updates" />
         <Checkbox CheckboxClassName="text-white" label="Include SubItems" />
