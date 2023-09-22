@@ -32,7 +32,7 @@ const App = () => {
 
   return (
     <div className="flex items-center justify-center h-screen w-screen bg-[#181B34]">
-      <Export monday={monday} />
+      <Export monday={monday} context={context} />
     </div>
   );
 };
