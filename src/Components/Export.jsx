@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Checkbox } from "monday-ui-react-core";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import puppeteer from "puppeteer";
 
 const Export = ({ monday, context }) => {
   const [pdfTable, setPdfTable] = useState("");
@@ -29,24 +30,27 @@ const Export = ({ monday, context }) => {
       // Create a new jsPDF instance
       const tableData = JSON.parse(newData);
       console.log(newData);
-      const doc = new jsPDF();
 
       // Convert table data to HTML based on checkboxes
-      const tableHtml = `<table>
-        <thead>
-          <tr>  
-            <th>Name</th>
-            <th>Person</th>
-            <th>Status</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${parseDataForTable(tableData[0].groups.items)}
-        </tbody>
-      </table>`;
+      const HTML = `
+        <html>
+          <head>
+            <style>
+              table {
+                border-collapse: collapse;
+                width: 100%;
+              }
+              </style>
+          </head>
+          <body>
+            <table>
+              ${parseDataForTable(tableData)}
+            </table>
+          </body>
+        </html>
+      `;
 
-      setPdfTable(tableHtml);
+      setPdfTable(HTML);
     };
 
     if (data) {
@@ -55,14 +59,15 @@ const Export = ({ monday, context }) => {
   }, [data]);
 
   useEffect(() => {
+    const doc = new jsPDF();
     // Use html2canvas to convert the table to an image
     // console.log(document.querySelector("#pdfTable").innerHTML);
     html2canvas(document.querySelector("#pdfTable")).then((canvas) => {
       console.log(canvas);
       const imgData = canvas.toDataURL("image/png");
       console.log(imgData);
-      // doc.addImage(imgData, "PNG", 10, 10, 180, 0);
-      // doc.save("table.pdf");
+      doc.addImage(imgData, "PNG", 10, 10, 180, 0);
+      doc.save("table.pdf");
     });
   }, [pdfTable]);
 
@@ -111,7 +116,7 @@ const Export = ({ monday, context }) => {
               }`,
                 {
                   token:
-                    "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjI4MTk4Mjg4NywiYWFpIjoxMSwidWlkIjo0ODU5NTMzMiwiaWFkIjoiMjAyMy0wOS0xNFQyMTo0MDo0MS4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTg3MTUzNzYsInJnbiI6ImV1YzEifQ.pmVheIJ_ordb6DX7Zzj3_5ztoe7tWM3dMax0nmo-DTM",
+                    "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjI4MTk4Mjg4NywiYWFpIjoxMSwidWlkIjo0ODU5NTMzMiwiaWFkIjoiMjAyMy0wOS0xNFQyMTo0MDo0MS4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTg3MTUzNzYsInJnbiI6ImV1YzEifQ.pmVheIJ_ordb6DX7Zzj3_5ztoe7tWM3dMax0nmo-DTM"
                 }
               )
               .then((res) => {
@@ -128,7 +133,7 @@ const Export = ({ monday, context }) => {
         <div
           id="pdfTable"
           dangerouslySetInnerHTML={{ __html: pdfTable }}
-          // style={{ display: "none" }}
+          style={{ display: "hidden" }}
         />
       </div>
     </>

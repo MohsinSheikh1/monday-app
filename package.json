@@ -17,7 +17,8 @@
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.6.0",
     "monday-sdk-js": "^0.1.4",
-    "monday-ui-react-core": "^2.36.2"
+    "monday-ui-react-core": "^2.36.2",
+    "puppeteer": "^21.3.4"
   },
   "eslintConfig": {
     "extends": "react-app"
