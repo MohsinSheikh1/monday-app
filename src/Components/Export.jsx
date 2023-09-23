@@ -29,7 +29,6 @@ const Export = ({ monday, context }) => {
       // Create a new jsPDF instance
       const tableData = JSON.parse(newData);
       console.log(newData);
-      const doc = new jsPDF();
 
       // Convert table data to HTML based on checkboxes
       const tableHtml = `<table>
@@ -55,14 +54,15 @@ const Export = ({ monday, context }) => {
   }, [data]);
 
   useEffect(() => {
+    const doc = new jsPDF();
     // Use html2canvas to convert the table to an image
     // console.log(document.querySelector("#pdfTable").innerHTML);
     html2canvas(document.querySelector("#pdfTable")).then((canvas) => {
       console.log(canvas);
       const imgData = canvas.toDataURL("image/png");
       console.log(imgData);
-      // doc.addImage(imgData, "PNG", 10, 10, 180, 0);
-      // doc.save("table.pdf");
+      doc.addImage(imgData, "PNG", 10, 10, 180, 0);
+      doc.save("table.pdf");
     });
   }, [pdfTable]);
 
