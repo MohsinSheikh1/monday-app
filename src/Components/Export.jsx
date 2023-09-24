@@ -115,6 +115,7 @@ const Export = ({ monday, context }) => {
                 }
               )
               .then((res) => {
+                console.log(context);
                 setData(JSON.stringify(res.data.boards));
               })
               .catch((error) => {
