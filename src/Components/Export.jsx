@@ -111,11 +111,11 @@ const Export = ({ monday, context }) => {
               }`,
                 {
                   token:
-                    "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjI4MTk4Mjg4NywiYWFpIjoxMSwidWlkIjo0ODU5NTMzMiwiaWFkIjoiMjAyMy0wOS0xNFQyMTo0MDo0MS4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTg3MTUzNzYsInJnbiI6ImV1YzEifQ.pmVheIJ_ordb6DX7Zzj3_5ztoe7tWM3dMax0nmo-DTM",
+                    "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjI4MTk4Mjg4NywiYWFpIjoxMSwidWlkIjo0ODU5NTMzMiwiaWFkIjoiMjAyMy0wOS0xNFQyMTo0MDo0MS4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTg3MTUzNzYsInJnbiI6ImV1YzEifQ.pmVheIJ_ordb6DX7Zzj3_5ztoe7tWM3dMax0nmo-DTM"
                 }
               )
               .then((res) => {
-                console.log(context);
+                console.log(JSON.stringify(context));
                 setData(JSON.stringify(res.data.boards));
               })
               .catch((error) => {
@@ -129,7 +129,7 @@ const Export = ({ monday, context }) => {
         <div
           id="pdfTable"
           dangerouslySetInnerHTML={{ __html: pdfTable }}
-          // style={{ display: "none" }}
+          style={{ display: "hidden" }}
         />
       </div>
     </>

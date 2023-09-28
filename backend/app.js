@@ -19,13 +19,15 @@ async function getRequiredData(context) {
                     columns {
                         title
                         id
+                        settings_str
                       }
                     groups (ids: ["${context.groupId}"]) {
                         title
                         items {
                             id
                             name
-                            column_values {
+                            column_values 
+                            {
                                 value
                                 type
                                 id
@@ -37,17 +39,41 @@ async function getRequiredData(context) {
             }`
     )
   );
+
   data = JSON.parse(data);
   data = data.data;
+  console.log(data.boards[0].columns[3].settings_str);
   return data;
 }
 
 function generateHTML(data) {
   const html = `
         <html>
-            ${data.boards
-              .map((board, i) => {
-                return `<h1>${board.name}</h1>
+        <head>
+            <style>
+                h1, h2 {
+                    text-align: center;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+                th, td {
+                    border: 1px solid black;
+                    text-align: center;
+                }
+                th {
+                    background-color: #f2f2f2;
+                    /*                    padding: .5rem;*/
+                    font-weight: bold;
+                    color: black;
+                }
+
+            </style>
+        <body>
+        ${data.boards
+          .map((board, i) => {
+            return `<h1>${board.name}</h1>
                 ${board.groups
                   .map((group, j) => {
                     return `<h2>${group.title}</h2>
@@ -77,8 +103,9 @@ function generateHTML(data) {
                       .join("")}`;
                   })
                   .join("")}`;
-              })
-              .join("")}
+          })
+          .join("")}
+                  </body>
         </html>
     `;
   return html;
@@ -95,7 +122,7 @@ async function generatePDF(html) {
 
   const pdf = await page.pdf({
     format: "A4",
-    printBackground: true,
+    printBackground: true
   });
 
   await browser.close();
@@ -112,7 +139,7 @@ app.post("/api/pdf", async (req, res) => {
 });
 
 app.post("/api/pdf/schedule", async (req, res) => {
-  const job = schedule.scheduleJob("40 3 24 9 0", async () => {
+  const job = schedule.scheduleJob("12 16 26 9 2", async () => {
     const data = await getRequiredData(req.body);
     const html = generateHTML(data);
     const pdf = await generatePDF(html);
@@ -123,22 +150,22 @@ app.post("/api/pdf/schedule", async (req, res) => {
       port: 465,
       auth: {
         user: "sheikhmohsin181@gmail.com",
-        pass: "ebmj lpyz ocbb wbwk",
-      },
+        pass: "ebmj lpyz ocbb wbwk"
+      }
     });
 
     const mailOptions = {
       from: "",
-      to: "sheikhmohsin181@gmail.com",
+      to: "faiqueahmadkhan@gmail.com",
       subject: "PDF",
       text: "PDF",
       attachments: [
         {
           filename: "PDF.pdf",
           content: pdf,
-          contentType: "application/pdf",
-        },
-      ],
+          contentType: "application/pdf"
+        }
+      ]
     };
 
     await transporter.sendMail(mailOptions);
