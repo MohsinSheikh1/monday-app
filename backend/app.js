@@ -3,6 +3,7 @@ const puppeteer = require("puppeteer");
 const schedule = require("node-schedule");
 const monday = require("monday-sdk-js")();
 const nodemailer = require("nodemailer");
+
 monday.setToken(
   "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjI4MTk4Mjg4NywiYWFpIjoxMSwidWlkIjo0ODU5NTMzMiwiaWFkIjoiMjAyMy0wOS0xNFQyMTo0MDo0MS4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTg3MTUzNzYsInJnbiI6ImV1YzEifQ.pmVheIJ_ordb6DX7Zzj3_5ztoe7tWM3dMax0nmo-DTM"
 );
@@ -17,6 +18,7 @@ async function getRequiredData(context) {
                 boards (ids: [${context.boardId}]) {
                     name
                     columns {
+                      type
                         title
                         id
                         settings_str
@@ -42,14 +44,87 @@ async function getRequiredData(context) {
 
   data = JSON.parse(data);
   data = data.data;
-  console.log(data.boards[0].columns[3].settings_str);
   return data;
 }
 
-function generateHTML(data) {
+function getStatusColumnsData(columns) {
+  const statusColumns = [];
+  columns.forEach((column) => {
+    if (column.type === "color") {
+      const settings_str = JSON.parse(column.settings_str);
+      const labels = Object.values(settings_str.labels);
+      const labelColors = Object.values(settings_str.labels_colors);
+      console.log(labels);
+      const statusColumn = {
+        id: column.id,
+        labels,
+        labelColors,
+      };
+      statusColumns.push(statusColumn);
+    }
+  });
+  return statusColumns;
+}
+
+function columnValuesToHTML(columnValues, statusColumns) {
+  return columnValues
+    .map((columnValues) => {
+      if (columnValues.type === "color") {
+        const statusColumn = statusColumns.find(
+          (statusColumn) => statusColumn.id === columnValues.id
+        );
+
+        const labelIndex = statusColumn.labels.indexOf(columnValues.text);
+        const labelColorBackground = statusColumn.labelColors[labelIndex].color;
+        const labelColorBorder = statusColumn.labelColors[labelIndex].border;
+
+        return `<td style="background-color: ${labelColorBackground}; border: 1px solid ${labelColorBorder};">${columnValues.text}</td>`;
+      }
+      return `<td>${columnValues.text}</td>`;
+    })
+    .join("");
+}
+
+function itemsToHTML(items, statusColumns) {
+  return items
+    .map((item) => {
+      return `
+            <tr>
+                <td>${item.name}</td>
+                ${columnValuesToHTML(item.column_values, statusColumns)}
+            </tr>
+            `;
+    })
+    .join("");
+}
+
+function columnsToHTML(columns) {
+  return columns
+    .map((column) => {
+      return `<th>${column.title}</th>`;
+    })
+    .join("");
+}
+
+function groupsToHTML(groups, columns, statusColumns) {
+  return groups
+    .map((group) => {
+      return `
+        <h2>${group.title}</h2>
+        <table>
+            <tr>
+                ${columnsToHTML(columns)}
+            </tr>
+            ${itemsToHTML(group.items, statusColumns)}
+    `;
+    })
+    .join("");
+}
+
+function generateHTML(boards) {
   const html = `
         <html>
-        <head>
+          <head>
             <style>
                 h1, h2 {
                     text-align: center;
@@ -70,42 +145,21 @@ function generateHTML(data) {
                 }
 
             </style>
-        <body>
-        ${data.boards
-          .map((board, i) => {
-            return `<h1>${board.name}</h1>
-                ${board.groups
-                  .map((group, j) => {
-                    return `<h2>${group.title}</h2>
-                  <table>
-                    <tr>
-                    ${board.columns
-                      .map((column) => {
-                        return `<th>
-                        ${column.title}
-                        </th>`;
-                      })
-                      .join("")}
-                    </tr>
-                    ${group.items
-                      .map((item) => {
-                        return `
-                        <tr>
-                            <td>${item.name}</td>
-                            ${item.column_values
-                              .map((column) => {
-                                return `<td>${column.text}</td>`;
-                              })
-                              .join("")}
-                        </tr>
-                        `;
-                      })
-                      .join("")}`;
-                  })
-                  .join("")}`;
-          })
-          .join("")}
-                  </body>
+          </head>
+          <body>
+            ${boards
+              .map((board, i) => {
+                const statusColumns = getStatusColumnsData(board.columns);
+                console.log(statusColumns);
+                return `<h1>${board.name}</h1>
+                    ${groupsToHTML(
+                      board.groups,
+                      board.columns,
+                      statusColumns
+                    )}`;
+              })
+              .join("")}
+          </body>
         </html>
     `;
   return html;
@@ -122,7 +176,7 @@ async function generatePDF(html) {
 
   const pdf = await page.pdf({
     format: "A4",
-    printBackground: true
+    printBackground: true,
   });
 
   await browser.close();
@@ -132,7 +186,7 @@ async function generatePDF(html) {
 
 app.post("/api/pdf", async (req, res) => {
   const data = await getRequiredData(req.body);
-  const html = generateHTML(data);
+  const html = generateHTML(data.boards);
   const pdf = await generatePDF(html);
   res.contentType("application/pdf");
   res.send(pdf);
@@ -150,8 +204,8 @@ app.post("/api/pdf/schedule", async (req, res) => {
       port: 465,
       auth: {
         user: "sheikhmohsin181@gmail.com",
-        pass: "ebmj lpyz ocbb wbwk"
-      }
+        pass: "ebmj lpyz ocbb wbwk",
+      },
     });
 
     const mailOptions = {
@@ -163,9 +217,9 @@ app.post("/api/pdf/schedule", async (req, res) => {
         {
           filename: "PDF.pdf",
           content: pdf,
-          contentType: "application/pdf"
-        }
-      ]
+          contentType: "application/pdf",
+        },
+      ],
     };
 
     await transporter.sendMail(mailOptions);
