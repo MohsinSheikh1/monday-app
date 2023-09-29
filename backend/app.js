@@ -11,7 +11,7 @@ const app = express();
 
 app.use(express.json());
 
-async function getRequiredData(context) {
+async function getRequiredData(context, includeSubitems, includeUpdates) {
   let data = JSON.stringify(
     await monday.api(
       `query {
@@ -44,6 +44,7 @@ async function getRequiredData(context) {
 
   data = JSON.parse(data);
   data = data.data;
+
   return data;
 }
 
@@ -54,7 +55,6 @@ function getStatusColumnsData(columns) {
       const settings_str = JSON.parse(column.settings_str);
       const labels = Object.values(settings_str.labels);
       const labelColors = Object.values(settings_str.labels_colors);
-      console.log(labels);
       const statusColumn = {
         id: column.id,
         labels,
@@ -150,7 +150,6 @@ function generateHTML(boards) {
             ${boards
               .map((board, i) => {
                 const statusColumns = getStatusColumnsData(board.columns);
-                console.log(statusColumns);
                 return `<h1>${board.name}</h1>
                     ${groupsToHTML(
                       board.groups,
@@ -184,15 +183,18 @@ async function generatePDF(html) {
   return pdf;
 }
 
-app.post("/api/pdf", async (req, res) => {
-  const data = await getRequiredData(req.body);
+app.get("/api/pdf", async (req, res) => {
+  const includeSubitems = Boolean(req.query.includeSubitems);
+  const includeUpdates = Boolean(req.query.includeUpdates);
+
+  const data = await getRequiredData(req.body, includeSubitems, includeUpdates);
   const html = generateHTML(data.boards);
   const pdf = await generatePDF(html);
   res.contentType("application/pdf");
   res.send(pdf);
 });
 
-app.post("/api/pdf/schedule", async (req, res) => {
+app.get("/api/pdf/schedule", async (req, res) => {
   const job = schedule.scheduleJob("12 16 26 9 2", async () => {
     const data = await getRequiredData(req.body);
     const html = generateHTML(data);
