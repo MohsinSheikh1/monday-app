@@ -58,7 +58,7 @@ function getStatusColumnsData(columns) {
       const statusColumn = {
         id: column.id,
         labels,
-        labelColors,
+        labelColors
       };
       statusColumns.push(statusColumn);
     }
@@ -175,7 +175,7 @@ async function generatePDF(html) {
 
   const pdf = await page.pdf({
     format: "A4",
-    printBackground: true,
+    printBackground: true
   });
 
   await browser.close();
@@ -183,7 +183,7 @@ async function generatePDF(html) {
   return pdf;
 }
 
-app.get("/api/pdf", async (req, res) => {
+app.post("/api/pdf", async (req, res) => {
   const includeSubitems = Boolean(req.query.includeSubitems);
   const includeUpdates = Boolean(req.query.includeUpdates);
 
@@ -194,9 +194,16 @@ app.get("/api/pdf", async (req, res) => {
   res.send(pdf);
 });
 
-app.get("/api/pdf/schedule", async (req, res) => {
-  const job = schedule.scheduleJob("12 16 26 9 2", async () => {
-    const data = await getRequiredData(req.body);
+app.post("/api/pdf/schedule", async (req, res) => {
+  const minutes = req.body.minutes;
+  const hours = req.body.hours;
+  const dayOfMonth = req.body.dayOfMonth;
+  const month = req.body.month;
+  const dayOfWeek = req.body.dayOfWeek;
+  const time =
+    minutes + " " + hours + " " + dayOfMonth + " " + month + " " + dayOfWeek;
+  const job = schedule.scheduleJob(time, async () => {
+    const data = await getRequiredData(req.body.context);
     const html = generateHTML(data);
     const pdf = await generatePDF(html);
 
@@ -206,8 +213,8 @@ app.get("/api/pdf/schedule", async (req, res) => {
       port: 465,
       auth: {
         user: "sheikhmohsin181@gmail.com",
-        pass: "ebmj lpyz ocbb wbwk",
-      },
+        pass: "ebmj lpyz ocbb wbwk"
+      }
     });
 
     const mailOptions = {
@@ -219,17 +226,19 @@ app.get("/api/pdf/schedule", async (req, res) => {
         {
           filename: "PDF.pdf",
           content: pdf,
-          contentType: "application/pdf",
-        },
-      ],
+          contentType: "application/pdf"
+        }
+      ]
     };
 
     await transporter.sendMail(mailOptions);
   });
 
+  res.send("Job scheduled");
   job.on("scheduled", () => {
-    console.log("Job scheduled");
-    res.send("Job scheduled");
+    console.log(
+      `Scheduling for ${minutes}:${hours}, on the ${dayOfMonth}/${month}`
+    );
   });
 });
 
