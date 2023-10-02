@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Checkbox } from "monday-ui-react-core";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
@@ -66,6 +67,8 @@ const Export = ({ monday, context }) => {
     });
   }, [pdfTable]);
 
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="flex flex-col items-start justify-between h-[50%] w-[50%]">
@@ -126,6 +129,13 @@ const Export = ({ monday, context }) => {
         >
           Export
         </button>
+        <button
+          className="bg-blue-500 px-4 py-2 rounded-lg hover:text-blue-500 hover:bg-transparent border-2 border-blue-500 box-border"
+          onClick={() => navigate("/schedule")}
+        >
+          Schedule
+        </button>
+
         <div
           id="pdfTable"
           dangerouslySetInnerHTML={{ __html: pdfTable }}
