@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Checkbox } from "monday-ui-react-core";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import axios from "axios";
 
 const Export = ({ monday, context }) => {
   const [pdfTable, setPdfTable] = useState("");
@@ -66,6 +67,17 @@ const Export = ({ monday, context }) => {
       doc.save("table.pdf");
     });
   }, [pdfTable]);
+
+  useEffect(() => {
+    const oAuth = async () => {
+      console.log("hello");
+      const url =
+        "https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543&redirect_uri=https://0901-111-68-97-201.ngrok-free.app/";
+      const response = await axios.get(url);
+      console.log(response);
+    };
+    oAuth();
+  }, []);
 
   const navigate = useNavigate();
 
