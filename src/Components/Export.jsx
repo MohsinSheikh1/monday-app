@@ -1,83 +1,23 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Checkbox } from "monday-ui-react-core";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 import axios from "axios";
 
 const Export = ({ monday, context }) => {
-  const [pdfTable, setPdfTable] = useState("");
-  const [data, setData] = useState("");
   const [includeUpdates, setIncludeUpdates] = useState(false);
   const [includeSubItems, setIncludeSubItems] = useState(false);
   const [sendCopyToEmail, setSendCopyToEmail] = useState(false);
 
-  useEffect(() => {
-    const parseDataForTable = (items) => {
-      // Implement your logic to parse data based on checkboxes
-      // Return the HTML table rows accordingly
-      // You can use the data state variable for this
-      const tableRow = `<tr>
-        <td>Item Name</td>
-        <td>Person</td>
-        <td>Status</td>
-        <td>Date</td>
-      </tr>`;
-
-      return tableRow;
-    };
-
-    const generatePDF = (newData) => {
-      // Create a new jsPDF instance
-      const tableData = JSON.parse(newData);
-      console.log(newData);
-
-      // Convert table data to HTML based on checkboxes
-      const tableHtml = `<table>
-        <thead>
-          <tr>  
-            <th>Name</th>
-            <th>Person</th>
-            <th>Status</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${parseDataForTable(tableData[0].groups.items)}
-        </tbody>
-      </table>`;
-
-      setPdfTable(tableHtml);
-    };
-
-    if (data) {
-      generatePDF(data);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    const doc = new jsPDF();
-    // Use html2canvas to convert the table to an image
-    // console.log(document.querySelector("#pdfTable").innerHTML);
-    html2canvas(document.querySelector("#pdfTable")).then((canvas) => {
-      console.log(canvas);
-      const imgData = canvas.toDataURL("image/png");
-      console.log(imgData);
-      doc.addImage(imgData, "PNG", 10, 10, 180, 0);
-      doc.save("table.pdf");
-    });
-  }, [pdfTable]);
-
-  useEffect(() => {
-    const oAuth = async () => {
-      console.log("hello");
-      const url =
-        "https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543&redirect_uri=https://0901-111-68-97-201.ngrok-free.app/";
-      const response = await axios.get(url);
-      console.log(response);
-    };
-    oAuth();
-  }, []);
+  // useEffect(() => {
+  //   const oAuth = async () => {
+  //     console.log("hello");
+  //     const url =
+  //       "https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543";
+  //     const response = await axios.get(url);
+  //     console.log(response);
+  //   };
+  //   oAuth();
+  // }, []);
 
   const navigate = useNavigate();
 
@@ -105,39 +45,7 @@ const Export = ({ monday, context }) => {
 
         <button
           className="bg-blue-500 px-4 py-2 rounded-lg hover:text-blue-500 hover:bg-transparent border-2 border-blue-500 box-border"
-          onClick={() => {
-            monday
-              .api(
-                `query {
-                boards(ids: [${context.boardId}]) {
-                  name
-                  groups(ids: ["${context.groupId}"]) {
-                    items {
-                      id
-                      name
-                      column_values {
-                        value
-                        type
-                        id
-                      }
-                    }
-                  }
-                }
-              }`,
-                {
-                  token:
-                    "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjI4MTk4Mjg4NywiYWFpIjoxMSwidWlkIjo0ODU5NTMzMiwiaWFkIjoiMjAyMy0wOS0xNFQyMTo0MDo0MS4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTg3MTUzNzYsInJnbiI6ImV1YzEifQ.pmVheIJ_ordb6DX7Zzj3_5ztoe7tWM3dMax0nmo-DTM"
-                }
-              )
-              .then((res) => {
-                console.log(JSON.stringify(context));
-                setData(JSON.stringify(res.data.boards));
-              })
-              .catch((error) => {
-                console.error("API call error:", error);
-                // Handle error here
-              });
-          }}
+          onClick={() => {}}
         >
           Export
         </button>
@@ -147,12 +55,6 @@ const Export = ({ monday, context }) => {
         >
           Schedule
         </button>
-
-        <div
-          id="pdfTable"
-          dangerouslySetInnerHTML={{ __html: pdfTable }}
-          style={{ display: "hidden" }}
-        />
       </div>
     </>
   );
