@@ -16,7 +16,7 @@ const Scheduling = () => {
     setConvertedDate(formattedDate);
   };
   return (
-    <div className="flex flex-col items-center justify-start w-full gap-8">
+    <div className="flex flex-col items-center justify-start w-full gap-8 p-[10%] overflow-hidden">
       <div className="flex flex-col items-center justify-start w-full gap-2">
         <h1 className="text-white font-bold text-4xl">
           Schedule the PDF Export for Later
@@ -49,7 +49,7 @@ const Scheduling = () => {
       </div>
       <button
         onClick={handleConversion}
-        className="text-white px-4 py-2 bg-blue-400 rounded-lg"
+        className="text-white px-4 py-2 bg-blue-500 rounded-lg"
       >
         Convert
       </button>

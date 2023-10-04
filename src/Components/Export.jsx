@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Checkbox } from "monday-ui-react-core";
 import axios from "axios";
 
 const Export = ({ monday, context }) => {
@@ -23,38 +22,64 @@ const Export = ({ monday, context }) => {
 
   return (
     <>
-      <div className="flex flex-col items-start justify-between h-[50%] w-[50%]">
+      <div className="flex flex-col items-start justify-between h-full w-full p-[10%]">
         <h1 className="font-bold text-4xl text-white">Export to PDF</h1>
         <div>
-          <Checkbox
-            CheckboxClassName="text-white"
-            label="Include Updates"
-            onChange={() => setIncludeUpdates(!includeUpdates)}
-          />
-          <Checkbox
-            CheckboxClassName="text-white"
-            label="Include SubItems"
-            onChange={() => setIncludeSubItems(!includeSubItems)}
-          />
-          <Checkbox
-            labelClassName="primary-text-color"
-            label="Send a copy to my email"
-            onChange={() => setSendCopyToEmail(!sendCopyToEmail)}
-          />
+          {/* checkboxes */}
+          <div className="flex flex-col items-center justify-start gap-4 py-12">
+            <div className="flex items-center justify-start gap-4 w-full">
+              <input
+                type="checkbox"
+                id="include-updates"
+                name="include-updates"
+                checked={includeUpdates}
+                onChange={() => setIncludeUpdates(!includeUpdates)}
+              />
+              <label htmlFor="include-updates" className="text-white">
+                Include Updates
+              </label>
+            </div>
+            <div className="flex items-center justify-start gap-4 w-full">
+              <input
+                type="checkbox"
+                id="include-subitems"
+                name="include-subitems"
+                checked={includeSubItems}
+                onChange={() => setIncludeSubItems(!includeSubItems)}
+              />
+              <label htmlFor="include-subitems" className="text-white">
+                Include Subitems
+              </label>
+            </div>
+            <div className="flex items-center justify-start gap-4 w-full">
+              <input
+                type="checkbox"
+                id="send-copy-to-email"
+                name="send-copy-to-email"
+                checked={sendCopyToEmail}
+                onChange={() => setSendCopyToEmail(!sendCopyToEmail)}
+              />
+              <label htmlFor="send-copy-to-email" className="text-white">
+                Send Copy to Email
+              </label>
+            </div>
+          </div>
         </div>
 
-        <button
-          className="bg-blue-500 px-4 py-2 rounded-lg hover:text-blue-500 hover:bg-transparent border-2 border-blue-500 box-border"
-          onClick={() => {}}
-        >
-          Export
-        </button>
-        <button
-          className="bg-blue-500 px-4 py-2 rounded-lg hover:text-blue-500 hover:bg-transparent border-2 border-blue-500 box-border"
-          onClick={() => navigate("/schedule")}
-        >
-          Schedule
-        </button>
+        <div className="flex items-center justify-center gap-6 w-full">
+          <button
+            className="bg-blue-500 px-4 py-2 rounded-lg text-white hover:text-blue-500 hover:bg-transparent border-2 border-blue-500 box-border"
+            onClick={() => {}}
+          >
+            Export
+          </button>
+          <button
+            className="bg-blue-500 px-4 py-2 rounded-lg text-white hover:text-blue-500 hover:bg-transparent border-2 border-blue-500 box-border"
+            onClick={() => navigate("/schedule")}
+          >
+            Schedule
+          </button>
+        </div>
       </div>
     </>
   );
