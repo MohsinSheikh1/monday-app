@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { saveAs } from "file-saver";
 
 const Export = ({ monday, context }) => {
   const [includeUpdates, setIncludeUpdates] = useState(false);
@@ -17,6 +18,29 @@ const Export = ({ monday, context }) => {
   //   };
   //   oAuth();
   // }, []);
+
+  const getPDF = async () => {
+    const updates = includeSubItems ? "true" : "false";
+    const subitems = includeSubItems ? "true" : "false";
+    const email = sendCopyToEmail ? "true" : "false";
+    const url = `https://pdf-monday.onrender.com/api/pdf?includeSubitems=${subitems}&includeUpdates=${updates}`;
+    try {
+      await axios
+        .post(url, context, {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          },
+          responseType: "blob" // set the response type to blob
+        })
+        .then((res) => {
+          const pdfBlob = new Blob([res.data], { type: "application/pdf" });
+          saveAs(pdfBlob, "export.pdf"); // download the file
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const navigate = useNavigate();
 
@@ -69,7 +93,9 @@ const Export = ({ monday, context }) => {
         <div className="flex items-center justify-center gap-6 w-full">
           <button
             className="bg-blue-500 px-4 py-2 rounded-lg text-white hover:text-blue-500 hover:bg-transparent border-2 border-blue-500 box-border"
-            onClick={() => {}}
+            onClick={() => {
+              getPDF();
+            }}
           >
             Export
           </button>
