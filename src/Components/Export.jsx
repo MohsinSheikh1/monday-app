@@ -7,6 +7,7 @@ const Export = ({ monday, context }) => {
   const [includeUpdates, setIncludeUpdates] = useState(false);
   const [includeSubItems, setIncludeSubItems] = useState(false);
   const [sendCopyToEmail, setSendCopyToEmail] = useState(false);
+  const [serverHasKey, setServerHasKey] = useState(false);
 
   // useEffect(() => {
   //   const oAuth = async () => {
@@ -23,15 +24,32 @@ const Export = ({ monday, context }) => {
     const updates = includeSubItems ? "true" : "false";
     const subitems = includeSubItems ? "true" : "false";
     const email = sendCopyToEmail ? "true" : "false";
+
+    // if (!serverHasKey) {
+    // const url = `https://pdf-monday.onrender.com/user/:id`;
+    // const response = await axios.get(url);
+
+    // if (response.hasKey) {
+    // setServerHasKey(true);
+    // } else {
+    const oAuthUrl =
+      "https://auth.monday.com/oauth2/authorize?client_id=5856e829a851e4cc75bf0b80780176e8";
+
+    monday.execute("openLinkInTab", {
+      url: "https://auth.monday.com/oauth2/authorize?client_id=5856e829a851e4cc75bf0b80780176e8?redirect_uri=https://pdf-monday.onrender.com/user",
+    });
+    // }
+    // }
+    console.log(context);
     const url = `https://pdf-monday.onrender.com/api/pdf?includeSubitems=${subitems}&includeUpdates=${updates}`;
     try {
       await axios
         .post(url, context, {
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*"
+            "Access-Control-Allow-Origin": "*",
           },
-          responseType: "blob" // set the response type to blob
+          responseType: "blob", // set the response type to blob
         })
         .then((res) => {
           const pdfBlob = new Blob([res.data], { type: "application/pdf" });
