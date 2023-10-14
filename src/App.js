@@ -13,6 +13,8 @@ const monday = mondaySdk();
 
 const App = () => {
   const [context, setContext] = useState();
+  const queryParameters = new URLSearchParams(window.location.search);
+  const [hasKey, setHasKey] = useState(false);
 
   useEffect(() => {
     // Notice this method notifies the monday platform that user gains a first value in an app.
@@ -40,6 +42,7 @@ const App = () => {
             element={<Scheduling monday={monday} context={context} />}
           />
         </Routes>
+        <p></p>
       </Router>
     </div>
   );

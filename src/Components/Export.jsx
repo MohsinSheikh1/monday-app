@@ -35,9 +35,8 @@ const Export = ({ monday, context }) => {
     const oAuthUrl =
       "https://auth.monday.com/oauth2/authorize?client_id=5856e829a851e4cc75bf0b80780176e8";
 
-    monday.execute("openLinkInTab", {
-      url: "https://auth.monday.com/oauth2/authorize?client_id=5856e829a851e4cc75bf0b80780176e8?redirect_uri=https://pdf-monday.onrender.com/user",
-    });
+    window.location.href =
+      "https://auth.monday.com/oauth2/authorize?client_id=5856e829a851e4cc75bf0b80780176e8?redirect_uri=https://ff6e-111-68-97-202.ngrok-free.app/";
     // }
     // }
     console.log(context);
