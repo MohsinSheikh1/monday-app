@@ -25,30 +25,15 @@ const Export = ({ monday, context }) => {
     const subitems = includeSubItems ? "true" : "false";
     const email = sendCopyToEmail ? "true" : "false";
 
-    // if (!serverHasKey) {
-    // const url = `https://pdf-monday.onrender.com/user/:id`;
-    // const response = await axios.get(url);
-
-    // if (response.hasKey) {
-    // setServerHasKey(true);
-    // } else {
-    const oAuthUrl =
-      "https://auth.monday.com/oauth2/authorize?client_id=5856e829a851e4cc75bf0b80780176e8";
-
-    window.location.href =
-      "https://auth.monday.com/oauth2/authorize?client_id=5856e829a851e4cc75bf0b80780176e8?redirect_uri=https://ff6e-111-68-97-202.ngrok-free.app/";
-    // }
-    // }
-    console.log(context);
     const url = `https://pdf-monday.onrender.com/api/pdf?includeSubitems=${subitems}&includeUpdates=${updates}`;
     try {
       await axios
         .post(url, context, {
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "*"
           },
-          responseType: "blob", // set the response type to blob
+          responseType: "blob" // set the response type to blob
         })
         .then((res) => {
           const pdfBlob = new Blob([res.data], { type: "application/pdf" });
