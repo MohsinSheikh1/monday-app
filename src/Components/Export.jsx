@@ -6,7 +6,7 @@ import { saveAs } from "file-saver";
 const Export = ({ monday, context }) => {
   const [includeUpdates, setIncludeUpdates] = useState(false);
   const [includeSubItems, setIncludeSubItems] = useState(false);
-  const [sendCopyToEmail, setSendCopyToEmail] = useState(false);
+  // const [sendCopyToEmail, setSendCopyToEmail] = useState(false);
 
   // useEffect(() => {
   //   const oAuth = async () => {
@@ -97,7 +97,7 @@ const Export = ({ monday, context }) => {
                 Include Subitems
               </label>
             </div>
-            <div className="flex items-center justify-start gap-4 w-full">
+            {/* <div className="flex items-center justify-start gap-4 w-full">
               <input
                 type="checkbox"
                 id="send-copy-to-email"
@@ -108,7 +108,7 @@ const Export = ({ monday, context }) => {
               <label htmlFor="send-copy-to-email" className="text-white">
                 Send Copy to Email
               </label>
-            </div>
+            </div> */}
           </div>
         </div>
 
