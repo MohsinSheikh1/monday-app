@@ -41,6 +41,28 @@ const Export = ({ monday, context }) => {
       console.log(error);
     }
   };
+  const wholeBoard = async () => {
+    const updates = includeSubItems ? "true" : "false";
+    const subitems = includeSubItems ? "true" : "false";
+
+    const url = `https://pdf-monday.onrender.com/api/pdf?includeSubitems=${subitems}&includeUpdates=${updates}&wholeBoard=true`;
+    try {
+      await axios
+        .post(url, context, {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          },
+          responseType: "blob" // set the response type to blob
+        })
+        .then((res) => {
+          const pdfBlob = new Blob([res.data], { type: "application/pdf" });
+          saveAs(pdfBlob, "export.pdf"); // download the file
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const navigate = useNavigate();
 
@@ -97,7 +119,15 @@ const Export = ({ monday, context }) => {
               getPDF();
             }}
           >
-            Export
+            Export Selected
+          </button>
+          <button
+            className="bg-blue-500 px-4 py-2 rounded-lg text-white hover:text-blue-500 hover:bg-transparent border-2 border-blue-500 box-border"
+            onClick={() => {
+              wholeBoard();
+            }}
+          >
+            Export Whole Board
           </button>
           <button
             className="bg-blue-500 px-4 py-2 rounded-lg text-white hover:text-blue-500 hover:bg-transparent border-2 border-blue-500 box-border"
