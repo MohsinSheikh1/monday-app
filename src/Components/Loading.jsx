@@ -30,7 +30,7 @@ const Loading = ({ context }) => {
           const hasKey = res.data.hasKey;
           if (!hasKey) {
             window.location.href =
-              "https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543?redirect_uri=https://8893-2a09-bac5-5038-15f-00-23-417.ngrok-free.app/";
+              "https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543?redirect_uri=https://pdfxport.netlify.app/";
           } else {
             navigate("/export");
           }
