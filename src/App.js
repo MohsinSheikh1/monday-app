@@ -7,7 +7,6 @@ import "monday-ui-react-core/dist/main.css";
 //Explore more Monday React Components here: https://style.monday.com/
 import Export from "./Components/Export";
 import Scheduling from "./Components/Scheduling";
-import axios from "axios";
 import Loading from "./Components/Loading";
 
 // Usage of mondaySDK example, for more information visit here: https://developer.monday.com/apps/docs/introduction-to-the-sdk/
@@ -15,7 +14,6 @@ const monday = mondaySdk();
 
 const App = () => {
   const [context, setContext] = useState();
-  const [hasKey, setHasKey] = useState(false);
 
   useEffect(() => {
     // Notice this method notifies the monday platform that user gains a first value in an app.

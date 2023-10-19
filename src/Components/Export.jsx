@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { saveAs } from "file-saver";
@@ -7,7 +7,6 @@ const Export = ({ monday, context }) => {
   const [includeUpdates, setIncludeUpdates] = useState(false);
   const [includeSubItems, setIncludeSubItems] = useState(false);
   const [sendCopyToEmail, setSendCopyToEmail] = useState(false);
-  const [serverHasKey, setServerHasKey] = useState(false);
 
   // useEffect(() => {
   //   const oAuth = async () => {
@@ -23,7 +22,6 @@ const Export = ({ monday, context }) => {
   const getPDF = async () => {
     const updates = includeSubItems ? "true" : "false";
     const subitems = includeSubItems ? "true" : "false";
-    const email = sendCopyToEmail ? "true" : "false";
 
     const url = `https://pdf-monday.onrender.com/api/pdf?includeSubitems=${subitems}&includeUpdates=${updates}`;
     try {
