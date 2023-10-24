@@ -119,7 +119,7 @@ const Export = ({ monday, context }) => {
               getPDF();
             }}
           >
-            Export Selected
+            Export Group
           </button>
           <button
             className="bg-blue-500 px-4 py-2 rounded-lg text-white hover:text-blue-500 hover:bg-transparent border-2 border-blue-500 box-border"
@@ -127,13 +127,13 @@ const Export = ({ monday, context }) => {
               wholeBoard();
             }}
           >
-            Export Whole Board
+            Export Board
           </button>
           <button
             className="bg-blue-500 px-4 py-2 rounded-lg text-white hover:text-blue-500 hover:bg-transparent border-2 border-blue-500 box-border"
             onClick={() => navigate("/schedule")}
           >
-            Schedule
+            Schedule Export
           </button>
         </div>
       </div>
