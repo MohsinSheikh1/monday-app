@@ -12,7 +12,7 @@ const Loading = ({ context }) => {
       await axios
         .post("https://pdf-monday.onrender.com/api/user", {
           code: code,
-          id: userId,
+          id: userId
         })
         .then(() => {
           navigate("/export");

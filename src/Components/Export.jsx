@@ -34,6 +34,10 @@ const Export = ({ monday, context }) => {
           responseType: "blob" // set the response type to blob
         })
         .then((res) => {
+          if (res.data.error === "Invalid Authentication") {
+            window.location.href =
+              "https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543?redirect_uri=https://xportpdfmonday.netlify.app/";
+          }
           const pdfBlob = new Blob([res.data], { type: "application/pdf" });
           saveAs(pdfBlob, "export.pdf"); // download the file
         });
@@ -56,6 +60,10 @@ const Export = ({ monday, context }) => {
           responseType: "blob" // set the response type to blob
         })
         .then((res) => {
+          if (res.data.error === "Invalid Authentication") {
+            window.location.href =
+              "https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543?redirect_uri=https://xportpdfmonday.netlify.app/";
+          }
           const pdfBlob = new Blob([res.data], { type: "application/pdf" });
           saveAs(pdfBlob, "export.pdf"); // download the file
         });

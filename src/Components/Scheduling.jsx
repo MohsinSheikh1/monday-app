@@ -38,8 +38,12 @@ const Scheduling = () => {
           email: email
         }
       )
-      .then(() => {
+      .then((res) => {
         setLoading(false);
+        if (res.data.error === "Invalid Authentication") {
+          window.location.href =
+            "https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543?redirect_uri=https://xportpdfmonday.netlify.app/";
+        }
         toast.success("Scheduled", {
           position: "bottom-left",
           autoClose: 2000,
@@ -81,8 +85,12 @@ const Scheduling = () => {
           email: email
         }
       )
-      .then(() => {
+      .then((res) => {
         setLoading(false);
+        if (res.data.error === "Invalid Authentication") {
+          window.location.href =
+            "https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543?redirect_uri=https://xportpdfmonday.netlify.app/";
+        }
         toast.success("Scheduled", {
           position: "bottom-left",
           autoClose: 2000,
@@ -101,7 +109,7 @@ const Scheduling = () => {
     <div className="flex flex-col items-center justify-start w-full h-screen gap-8 p-[10%] overflow-hidden">
       {loading && (
         <div className="flex flex-col items-center justify-center w-full h-full gap-8 p-[10%] overflow-hidden">
-          <h1 className="text-white font-bold text-4xl">Loading...</h1>
+          <h1 className="text-white font-bold text-4xl">Scheduling...</h1>
         </div>
       )}
       {!loading && (
