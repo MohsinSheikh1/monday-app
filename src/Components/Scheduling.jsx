@@ -12,6 +12,19 @@ const Scheduling = () => {
   const location = useLocation();
 
   const handleConversion = async () => {
+    if (!inputDate || email === "") {
+      toast.error("Please enter a valid date and email", {
+        position: "bottom-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark"
+      });
+      return;
+    }
     const date = new Date(inputDate);
 
     setConvertedDate(date.getTime());
@@ -39,6 +52,19 @@ const Scheduling = () => {
       );
   };
   const scheduleBoard = async () => {
+    if (!inputDate || email === "") {
+      toast.error("Please enter a valid date and email", {
+        position: "bottom-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark"
+      });
+      return;
+    }
     const date = new Date(inputDate);
 
     setConvertedDate(date.getTime());
@@ -101,7 +127,7 @@ const Scheduling = () => {
           className="bg-white rounded-lg w-[80%] max-w-[400px] px-4 py-2 focus:outline-0"
         />
       </div>
-      <div className="flex flex-row items-center justify-center">
+      <div className="flex flex-row items-center justify-center gap-4">
         <button
           onClick={handleConversion}
           className="text-white px-4 py-2 bg-blue-500 rounded-lg"
