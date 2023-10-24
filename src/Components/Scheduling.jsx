@@ -6,7 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Scheduling = () => {
   const [inputDate, setInputDate] = useState("");
-  const [convertedDate, setConvertedDate] = useState("");
   const [email, setEmail] = useState("");
 
   const location = useLocation();
@@ -28,15 +27,14 @@ const Scheduling = () => {
     }
     const date = new Date(inputDate);
 
-    setConvertedDate(date.getTime());
-    console.log(convertedDate);
+    console.log(date.getTime());
 
     await axios
       .post(
         `https://oyster-app-636br.ondigitalocean.app/api/pdf/schedule?includeSubitems=${location.state.subitems}&includeUpdates=${location.state.updates}`,
         {
           context: location.state.context,
-          date: convertedDate,
+          date: date.getTime(),
           email: email
         }
       )
@@ -70,14 +68,12 @@ const Scheduling = () => {
     }
     const date = new Date(inputDate);
 
-    setConvertedDate(date.getTime());
-
     await axios
       .post(
         `https://oyster-app-636br.ondigitalocean.app/api/pdf/schedule?includeSubitems=${location.state.subitems}&includeUpdates=${location.state.updates}&wholeBoard=true`,
         {
           context: location.state.context,
-          date: convertedDate,
+          date: date.getTime(),
           email: email
         }
       )
