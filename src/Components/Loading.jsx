@@ -12,7 +12,7 @@ const Loading = ({ context }) => {
       await axios
         .post("https://pdf-monday.onrender.com/api/user", {
           code: code,
-          id: userId
+          id: userId,
         })
         .then(() => {
           navigate("/export");
@@ -30,7 +30,7 @@ const Loading = ({ context }) => {
           const hasKey = res.data.hasKey;
           if (!hasKey) {
             window.location.href =
-              "https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543?redirect_uri=https://pdfxport.netlify.app/";
+              "https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543?redirect_uri=https://xportpdfmonday.netlify.app/";
           } else {
             navigate("/export");
           }
