@@ -131,7 +131,15 @@ const Export = ({ monday, context }) => {
           </button>
           <button
             className="bg-blue-500 px-4 py-2 rounded-lg text-white hover:text-blue-500 hover:bg-transparent border-2 border-blue-500 box-border"
-            onClick={() => navigate("/schedule")}
+            onClick={() =>
+              navigate("/schedule", {
+                state: {
+                  subitems: includeSubItems,
+                  updates: includeUpdates,
+                  context: context
+                }
+              })
+            }
           >
             Schedule Export
           </button>
