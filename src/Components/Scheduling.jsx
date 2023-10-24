@@ -34,7 +34,7 @@ const Scheduling = () => {
         `https://oyster-app-636br.ondigitalocean.app/api/pdf/schedule?includeSubitems=${location.state.subitems}&includeUpdates=${location.state.updates}`,
         {
           context: location.state.context,
-          date: date.getTime(),
+          time: date.getTime(),
           email: email
         }
       )
@@ -73,7 +73,7 @@ const Scheduling = () => {
         `https://oyster-app-636br.ondigitalocean.app/api/pdf/schedule?includeSubitems=${location.state.subitems}&includeUpdates=${location.state.updates}&wholeBoard=true`,
         {
           context: location.state.context,
-          date: date.getTime(),
+          time: date.getTime(),
           email: email
         }
       )
