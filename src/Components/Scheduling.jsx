@@ -12,7 +12,8 @@ const Scheduling = () => {
   const location = useLocation();
 
   const handleConversion = async () => {
-    if (!inputDate || email === "") {
+    const currentDate = new Date();
+    if (!inputDate || email === "" || inputDate <= currentDate) {
       toast.error("Please enter a valid date and email", {
         position: "bottom-left",
         autoClose: 2000,
@@ -52,7 +53,8 @@ const Scheduling = () => {
       );
   };
   const scheduleBoard = async () => {
-    if (!inputDate || email === "") {
+    const currentDate = new Date();
+    if (!inputDate || email === "" || inputDate <= currentDate) {
       toast.error("Please enter a valid date and email", {
         position: "bottom-left",
         autoClose: 2000,
