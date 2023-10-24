@@ -6,14 +6,8 @@ const Scheduling = () => {
 
   const handleConversion = () => {
     const date = new Date(inputDate);
-    const minutes = date.getMinutes();
-    const hours = date.getHours();
-    const month = date.getMonth() + 1; // Months are 0-indexed
-    const dayOfMonth = date.getDate();
-    const dayOfWeek = date.getDay(); // 0 is Sunday, 6 is Saturday
 
-    const formattedDate = `${minutes} ${hours} ${month} ${dayOfMonth} ${dayOfWeek}`;
-    setConvertedDate(formattedDate);
+    setConvertedDate(date.getTime());
   };
   return (
     <div className="flex flex-col items-center justify-start w-full gap-8 p-[10%] overflow-hidden">
