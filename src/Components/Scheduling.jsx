@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Scheduling = () => {
@@ -141,6 +141,7 @@ const Scheduling = () => {
           Schedule Board
         </button>
       </div>
+      <ToastContainer />
     </div>
   );
 };
