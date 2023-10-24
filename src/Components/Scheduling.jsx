@@ -29,6 +29,7 @@ const Scheduling = () => {
     const date = new Date(inputDate);
 
     setConvertedDate(date.getTime());
+    console.log(convertedDate);
 
     await axios
       .post(
