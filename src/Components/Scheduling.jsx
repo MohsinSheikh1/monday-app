@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useLocation } from "react-router";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Scheduling = () => {
