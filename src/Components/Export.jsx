@@ -70,12 +70,12 @@ const Export = ({ monday, context }) => {
   return (
     <>
       <div className="flex flex-col items-start justify-between h-full w-full p-[10%]">
-        {!loading && (
+        {loading && (
           <div className="flex flex-col items-center justify-center w-full h-full gap-8 p-[10%] overflow-hidden">
             <h1 className="text-white font-bold text-4xl">Downloading...</h1>
           </div>
         )}
-        {loading && (
+        {!loading && (
           <>
             <h1 className="font-bold text-4xl text-white">Export to PDF</h1>
             <div>
