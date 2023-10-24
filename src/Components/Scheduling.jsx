@@ -29,8 +29,6 @@ const Scheduling = () => {
     setLoading(true);
     const date = new Date(inputDate);
 
-    console.log(date.getTime());
-
     await axios
       .post(
         `https://oyster-app-636br.ondigitalocean.app/api/pdf/schedule?includeSubitems=${location.state.subitems}&includeUpdates=${location.state.updates}`,
