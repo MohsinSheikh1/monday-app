@@ -2,7 +2,7 @@ import React from "react";
 
 const PrivacyPolicy = () => {
   return (
-    <div className="flex flex-col items-start justify-start w-full my-8 ">
+    <div className="flex flex-col items-start justify-start w-full my-8 overflow-scroll">
       <p className="text-3xl w-full text-center font-extrabold text-white">
         Privacy Policy for PdfxPort App by Beastical Inc.
       </p>
