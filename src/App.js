@@ -8,6 +8,8 @@ import "monday-ui-react-core/dist/main.css";
 import Export from "./Components/Export";
 import Scheduling from "./Components/Scheduling";
 import Loading from "./Components/Loading";
+import PrivacyPolicy from "./Components/PrivacyPolicy";
+import TermOfService from "./Components/TermOfService";
 
 // Usage of mondaySDK example, for more information visit here: https://developer.monday.com/apps/docs/introduction-to-the-sdk/
 const monday = mondaySdk();
@@ -41,6 +43,8 @@ const App = () => {
             path="/schedule"
             element={<Scheduling monday={monday} context={context} />}
           />
+          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+          <Route path="/termofservice" element={<TermOfService />} />
         </Routes>
         <p></p>
       </Router>
