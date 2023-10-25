@@ -13,7 +13,7 @@ const Export = ({ monday, context }) => {
     const updates = includeSubItems ? "true" : "false";
     const subitems = includeSubItems ? "true" : "false";
 
-    const url = `https://pdf-monday.onrender.com/api/pdf?includeSubitems=${subitems}&includeUpdates=${updates}`;
+    const url = `https://pdfxport-k84zo.ondigitalocean.app/api/pdf?includeSubitems=${subitems}&includeUpdates=${updates}`;
     try {
       await axios
         .post(url, context, {
@@ -41,7 +41,7 @@ const Export = ({ monday, context }) => {
     const updates = includeSubItems ? "true" : "false";
     const subitems = includeSubItems ? "true" : "false";
 
-    const url = `https://pdf-monday.onrender.com/api/pdf?includeSubitems=${subitems}&includeUpdates=${updates}&wholeBoard=true`;
+    const url = `https://pdfxport-k84zo.ondigitalocean.app/api/pdf?includeSubitems=${subitems}&includeUpdates=${updates}&wholeBoard=true`;
     try {
       await axios
         .post(url, context, {

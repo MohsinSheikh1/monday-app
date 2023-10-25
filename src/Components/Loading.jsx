@@ -10,7 +10,7 @@ const Loading = ({ context }) => {
     try {
       const code = queryParameters.get("code");
       await axios
-        .post("https://pdf-monday.onrender.com/api/user", {
+        .post("https://pdfxport-k84zo.ondigitalocean.app/api/user", {
           code: code,
           id: userId
         })
@@ -25,7 +25,7 @@ const Loading = ({ context }) => {
   const checkUser = async (userId) => {
     try {
       await axios
-        .get(`https://pdf-monday.onrender.com/api/user/${userId}`)
+        .get(`https://pdfxport-k84zo.ondigitalocean.app/api/user/${userId}`)
         .then((res) => {
           const hasKey = res.data.hasKey;
           if (!hasKey) {
