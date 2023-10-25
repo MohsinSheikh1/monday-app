@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -10,6 +10,7 @@ const Scheduling = () => {
   const [loading, setLoading] = useState(false);
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleConversion = async () => {
     const currentDate = new Date();
@@ -114,7 +115,13 @@ const Scheduling = () => {
       )}
       {!loading && (
         <>
-          <div className="flex flex-col items-center justify-start w-full gap-2">
+          <div className="flex flex-row items-center justify-start w-full gap-2">
+            <button
+              onClick={() => navigate("/export")}
+              className="text-white px-4 py-2 bg-blue-500 rounded-lg"
+            >
+              Back
+            </button>
             <h1 className="text-white font-bold text-4xl">
               Schedule the PDF Export for Later
             </h1>
