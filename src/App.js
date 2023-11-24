@@ -31,24 +31,32 @@ const App = () => {
   //Some example what you can do with context, read more here: https://developer.monday.com/apps/docs/mondayget#requesting-context-and-settings-data
 
   return (
-    <div className="flex items-center justify-center h-screen w-screen bg-[#181B34]">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Loading context={context} />} />
-          <Route
-            path="/export"
-            element={<Export monday={monday} context={context} />}
-          />
-          <Route
-            path="/schedule"
-            element={<Scheduling monday={monday} context={context} />}
-          />
-          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-          <Route path="/termofservice" element={<TermOfService />} />
-        </Routes>
-        <p></p>
-      </Router>
-    </div>
+    <>
+      <div
+        className={`flex items-center justify-center ${
+          window.location.pathname === "/privacypolicy" ||
+          window.location.pathname === "/termofservice"
+            ? ""
+            : "h-screen w-screen"
+        }  bg-[#181B34]`}
+      >
+        <Router>
+          <Routes>
+            <Route path="/" element={<Loading context={context} />} />
+            <Route
+              path="/export"
+              element={<Export monday={monday} context={context} />}
+            />
+            <Route
+              path="/schedule"
+              element={<Scheduling monday={monday} context={context} />}
+            />
+            <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+            <Route path="/termofservice" element={<TermOfService />} />
+          </Routes>
+        </Router>
+      </div>
+    </>
   );
 };
 

@@ -2,7 +2,7 @@ import React from "react";
 
 const TermOfService = () => {
   return (
-    <div className="flex flex-col items-start justify-start w-full my-8 ">
+    <div className="flex flex-col items-start justify-start w-full my-8 mx-4">
       <p className="text-3xl w-full text-center font-extrabold text-white">
         Terms of Service for PdfxPort App by Beastical Inc.
       </p>
