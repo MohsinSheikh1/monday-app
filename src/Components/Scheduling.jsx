@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Scheduling = () => {
+const Scheduling = ({ monday }) => {
   const [inputDate, setInputDate] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ const Scheduling = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark"
+        theme: "dark",
       });
       return;
     }
@@ -37,7 +37,7 @@ const Scheduling = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark"
+        theme: "dark",
       });
       return;
     }
@@ -50,14 +50,27 @@ const Scheduling = () => {
         {
           context: location.state.context,
           time: date.getTime(),
-          email: email
+          email: email,
         }
       )
       .then((res) => {
         setLoading(false);
         if (res.data.error === "Invalid Authentication") {
-          window.location.href =
-            "https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543?redirect_uri=https://xportpdfmonday.netlify.app/";
+          monday
+            .api(
+              `query {
+                account {
+                slug
+                id
+              }
+            }`
+            )
+            .then((data) => {
+              const account_data = data.data;
+              const account_slug = account_data.account.slug;
+              window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543&subdomain=${account_slug}&redirect_uri=https://xportpdfmonday.netlify.app/`;
+              return;
+            });
         }
         toast.success("Scheduled", {
           position: "bottom-left",
@@ -67,7 +80,7 @@ const Scheduling = () => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark"
+          theme: "dark",
         });
         setEmail("");
         setInputDate("");
@@ -84,7 +97,7 @@ const Scheduling = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark"
+        theme: "dark",
       });
       return;
     }
@@ -100,7 +113,7 @@ const Scheduling = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark"
+        theme: "dark",
       });
       return;
     }
@@ -114,14 +127,27 @@ const Scheduling = () => {
         {
           context: location.state.context,
           time: date.getTime(),
-          email: email
+          email: email,
         }
       )
       .then((res) => {
         setLoading(false);
         if (res.data.error === "Invalid Authentication") {
-          window.location.href =
-            "https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543?redirect_uri=https://xportpdfmonday.netlify.app/";
+          monday
+            .api(
+              `query {
+              account {
+                slug
+                id
+              }
+            }`
+            )
+            .then((data) => {
+              const account_data = data.data;
+              const account_slug = account_data.account.slug;
+              window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543&subdomain=${account_slug}&redirect_uri=https://xportpdfmonday.netlify.app/`;
+              return;
+            });
         }
         toast.success("Scheduled", {
           position: "bottom-left",
@@ -131,7 +157,7 @@ const Scheduling = () => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark"
+          theme: "dark",
         });
         setEmail("");
         setInputDate("");

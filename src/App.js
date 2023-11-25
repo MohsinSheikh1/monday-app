@@ -42,7 +42,10 @@ const App = () => {
       >
         <Router>
           <Routes>
-            <Route path="/" element={<Loading context={context} />} />
+            <Route
+              path="/"
+              element={<Loading context={context} monday={monday} />}
+            />
             <Route
               path="/export"
               element={<Export monday={monday} context={context} />}
