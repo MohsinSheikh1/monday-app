@@ -35,6 +35,8 @@ const Loading = ({ context, monday }) => {
 
   const checkUser = async (userId) => {
     try {
+      const token = monday.get("sessionToken");
+      console.log(token);
       const account_data = await monday.api(
         `query {
             account {
