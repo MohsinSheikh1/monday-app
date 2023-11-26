@@ -2,6 +2,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Jwt } from "jsonwebtoken";
 
 const Loading = ({ context, monday }) => {
   const navigate = useNavigate();
@@ -9,15 +10,8 @@ const Loading = ({ context, monday }) => {
   const apiKey = async (queryParameters, userId) => {
     try {
       const code = queryParameters.get("code");
-      const account_data = await monday.api(
-        `query {
-            account {
-              slug
-              id
-            }
-          }`
-      );
-      const account_id = account_data.data.account.id;
+
+      const account_id = context.account.id;
 
       await axios
         .post("https://pdfxport-k84zo.ondigitalocean.app/api/user", {
@@ -36,16 +30,8 @@ const Loading = ({ context, monday }) => {
   const checkUser = async (userId) => {
     try {
       const token = await monday.get("sessionToken");
-      console.log(token);
-      const account_data = await monday.api(
-        `query {
-            account {
-              slug
-              id
-            }
-          }`
-      );
-      const account_id = account_data.data.account.id;
+
+      const account_id = context.account.id;
       await axios
         .get(
           `https://pdfxport-k84zo.ondigitalocean.app/api/user?user_id=${userId}&account_id=${account_id}`
@@ -53,20 +39,13 @@ const Loading = ({ context, monday }) => {
         .then((res) => {
           const hasKey = res.data.hasKey;
           if (!hasKey) {
-            monday
-              .api(
-                `query {
-              account {
-                slug
-                id
-              }
-            }`
+            axios
+              .post(
+                `https://pdfxport-k84zo.ondigitalocean.app/api/accountSlug`,
+                { token: token }
               )
               .then((data) => {
-                const account_data = data.data;
-                const account_slug = account_data.account.slug;
-                window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543&subdomain=${account_slug}&redirect_uri=https://xportpdfmonday.netlify.app/`;
-                return;
+                window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543&subdomain=${data.accountSlug}&redirect_uri=https://xportpdfmonday.netlify.app/`;
               });
           } else {
             navigate("/export");

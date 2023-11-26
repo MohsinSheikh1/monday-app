@@ -56,21 +56,17 @@ const Scheduling = ({ monday }) => {
       .then((res) => {
         setLoading(false);
         if (res.data.error === "Invalid Authentication") {
-          monday
-            .api(
-              `query {
-                account {
-                slug
-                id
-              }
-            }`
-            )
-            .then((data) => {
-              const account_data = data.data;
-              const account_slug = account_data.account.slug;
-              window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543&subdomain=${account_slug}&redirect_uri=https://xportpdfmonday.netlify.app/`;
-              return;
-            });
+          const token = monday.get("sessionToken").then((data) => {
+            axios
+              .post(
+                `https://pdfxport-k84zo.ondigitalocean.app/api/accountSlug`,
+                { token: token }
+              )
+              .then((data) => {
+                window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543&subdomain=${data.accountSlug}&redirect_uri=https://xportpdfmonday.netlify.app/`;
+                return;
+              });
+          });
         }
         toast.success("Scheduled", {
           position: "bottom-left",
@@ -133,21 +129,17 @@ const Scheduling = ({ monday }) => {
       .then((res) => {
         setLoading(false);
         if (res.data.error === "Invalid Authentication") {
-          monday
-            .api(
-              `query {
-              account {
-                slug
-                id
-              }
-            }`
-            )
-            .then((data) => {
-              const account_data = data.data;
-              const account_slug = account_data.account.slug;
-              window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543&subdomain=${account_slug}&redirect_uri=https://xportpdfmonday.netlify.app/`;
-              return;
-            });
+          const token = monday.get("sessionToken").then((data) => {
+            axios
+              .post(
+                `https://pdfxport-k84zo.ondigitalocean.app/api/accountSlug`,
+                { token: token }
+              )
+              .then((data) => {
+                window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543&subdomain=${data.accountSlug}&redirect_uri=https://xportpdfmonday.netlify.app/`;
+                return;
+              });
+          });
         }
         toast.success("Scheduled", {
           position: "bottom-left",
