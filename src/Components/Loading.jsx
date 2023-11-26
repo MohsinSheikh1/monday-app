@@ -44,7 +44,7 @@ const Loading = ({ context, monday }) => {
             axios
               .post(
                 `https://pdfxport-k84zo.ondigitalocean.app/api/accountSlug`,
-                { token: token }
+                { token: token.data }
               )
               .then((data) => {
                 console.log(data);
