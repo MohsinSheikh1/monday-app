@@ -29,8 +29,10 @@ const Loading = ({ context, monday }) => {
   const checkUser = async (userId) => {
     try {
       const token = await monday.get("sessionToken");
+      console.log("Token: " + token);
 
       const account_id = context.account.id;
+
       await axios
         .get(
           `https://pdfxport-k84zo.ondigitalocean.app/api/user?user_id=${userId}&account_id=${account_id}`
@@ -38,12 +40,14 @@ const Loading = ({ context, monday }) => {
         .then((res) => {
           const hasKey = res.data.hasKey;
           if (!hasKey) {
+            console.log("Doesnot have key");
             axios
               .post(
                 `https://pdfxport-k84zo.ondigitalocean.app/api/accountSlug`,
                 { token: token }
               )
               .then((data) => {
+                console.log(data);
                 window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543&subdomain=${data.accountSlug}&redirect_uri=https://xportpdfmonday.netlify.app/`;
               });
           } else {
