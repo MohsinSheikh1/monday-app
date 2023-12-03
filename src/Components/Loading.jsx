@@ -11,6 +11,7 @@ const Loading = ({ context, monday }) => {
       const code = queryParameters.get("code");
 
       const account_id = context.account.id;
+      console.log(userId, account_id, code);
 
       await axios
         .post("https://pdfxport-k84zo.ondigitalocean.app/api/user", {
