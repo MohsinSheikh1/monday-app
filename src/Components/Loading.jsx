@@ -48,7 +48,9 @@ const Loading = ({ context, monday }) => {
               )
               .then((data) => {
                 console.log(JSON.stringify(data));
-                window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=5856e829a851e4cc75bf0b80780176e8&subdomain=${data.accountSlug}&redirect_uri=https://xportpdfmonday.netlify.app/`;
+                console.log(data.accountSlug);
+                // window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=5856e829a851e4cc75bf0b80780176e8&subdomain=${data.accountSlug}&redirect_uri=https://xportpdfmonday.netlify.app/`;
+                window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=5856e829a851e4cc75bf0b80780176e8&redirect_uri=https://xportpdfmonday.netlify.app/&subdomain=${data.accountSlug}`;
               });
           } else {
             navigate("/export");
