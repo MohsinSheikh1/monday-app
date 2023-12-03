@@ -32,7 +32,7 @@ const Export = ({ monday, context }) => {
                   { token: token }
                 )
                 .then((data) => {
-                  window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543&subdomain=${data.accountSlug}&redirect_uri=https://xportpdfmonday.netlify.app/`;
+                  window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=5856e829a851e4cc75bf0b80780176e8&redirect_uri=https://xportpdfmonday.netlify.app/&subdomain=${data.data.accountSlug}`;
                   return;
                 });
             });
@@ -69,7 +69,7 @@ const Export = ({ monday, context }) => {
                   { token: token }
                 )
                 .then((data) => {
-                  window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543&subdomain=${data.accountSlug}&redirect_uri=https://xportpdfmonday.netlify.app/`;
+                  window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=5856e829a851e4cc75bf0b80780176e8&redirect_uri=https://xportpdfmonday.netlify.app/&subdomain=${data.data.accountSlug}`;
                   return;
                 });
             });

@@ -46,7 +46,7 @@ const Scheduling = ({ monday }) => {
 
     await axios
       .post(
-        `https://oyster-app-636br.ondigitalocean.app/api/pdf/schedule?includeSubitems=${location.state.subitems}&includeUpdates=${location.state.updates}`,
+        `https://pdfxport-k84zo.ondigitalocean.app/api/pdf/schedule?includeSubitems=${location.state.subitems}&includeUpdates=${location.state.updates}`,
         {
           context: location.state.context,
           time: date.getTime(),
@@ -63,7 +63,7 @@ const Scheduling = ({ monday }) => {
                 { token: token }
               )
               .then((data) => {
-                window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543&subdomain=${data.accountSlug}&redirect_uri=https://xportpdfmonday.netlify.app/`;
+                window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=5856e829a851e4cc75bf0b80780176e8&redirect_uri=https://xportpdfmonday.netlify.app/&subdomain=${data.data.accountSlug}`;
                 return;
               });
           });
@@ -119,7 +119,7 @@ const Scheduling = ({ monday }) => {
 
     await axios
       .post(
-        `https://oyster-app-636br.ondigitalocean.app/api/pdf/schedule?includeSubitems=${location.state.subitems}&includeUpdates=${location.state.updates}&wholeBoard=true`,
+        `https://pdfxport-k84zo.ondigitalocean.app/api/pdf/schedule?includeSubitems=${location.state.subitems}&includeUpdates=${location.state.updates}&wholeBoard=true`,
         {
           context: location.state.context,
           time: date.getTime(),
@@ -136,7 +136,7 @@ const Scheduling = ({ monday }) => {
                 { token: token }
               )
               .then((data) => {
-                window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=b431b5018a17b469ddb1066cdf41d543&subdomain=${data.accountSlug}&redirect_uri=https://xportpdfmonday.netlify.app/`;
+                window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=5856e829a851e4cc75bf0b80780176e8&redirect_uri=https://xportpdfmonday.netlify.app/&subdomain=${data.data.accountSlug}`;
                 return;
               });
           });

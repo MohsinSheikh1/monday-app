@@ -4,7 +4,7 @@ const PrivacyPolicy = () => {
   return (
     <div className="flex flex-col items-start justify-start w-full my-8 mx-4">
       <p className="text-3xl w-full text-center font-extrabold text-white">
-        Privacy Policy for PdfxPort App by Beastical Inc.
+        Privacy Policy for PDFXPORT App by Beastical Inc.
       </p>
       <p className="text-lg w-full text-center font-medium text-white mb-8">
         Last updated: 25th October 2023
@@ -13,10 +13,10 @@ const PrivacyPolicy = () => {
         1. Introduction
       </p>
       <p className="text-base w-full text-left font-medium text-white mb-8">
-        Thank you for choosing to use PdfxPort, a marketplace app developed by
+        Thank you for choosing to use PDFXPORT, a marketplace app developed by
         Beastical Inc. This Privacy Policy explains how Beastical Inc. ("we",
         "our", or "us") collects, uses, shares, and protects user information
-        while you use the PdfxPort app on <a href="monday.com">Monday.com</a>.
+        while you use the PDFXPORT app on <a href="monday.com">monday.com</a>.
       </p>
       <p className="text-lg w-full text-left font-bold text-white">
         2. Data Collection
@@ -29,14 +29,14 @@ const PrivacyPolicy = () => {
           User data: Your name, email address, and other contact details.
         </li>
         <li className="text-base w-full text-left font-medium text-white mb-8">
-          Usage data: Information related to how you use PdfxPort, including
+          Usage data: Information related to how you use PDFXPORT, including
           actions taken, date and time stamps, and frequency.
         </li>
         <li className="text-base w-full text-left font-medium text-white mb-8">
-          Your Monday.com board information.
+          Your monday.com board information.
         </li>
         <li className="text-base w-full text-left font-medium text-white mb-8">
-          Your Monday.com user information.
+          Your monday.com user information.
         </li>
       </ul>
       <p className="text-lg w-full text-left font-bold text-white">
@@ -47,7 +47,7 @@ const PrivacyPolicy = () => {
       </p>
       <ul className="list-inside list-disc">
         <li className="text-base w-full text-left font-medium text-white mb-8">
-          Enhancing the functionality and user experience of PdfxPort.
+          Enhancing the functionality and user experience of PDFXPORT.
         </li>
         <li className="text-base w-full text-left font-medium text-white mb-8">
           Troubleshooting issues and providing support.
@@ -64,7 +64,7 @@ const PrivacyPolicy = () => {
         We do not sell, trade, or rent your personal data. We may share
         aggregated demographic information not linked to personal data with our
         partners and advertisers. We may use third-party service providers to
-        help us operate our business and the PdfxPort or administer activities
+        help us operate our business and the PDFXPORT or administer activities
         on our behalf, such as sending out newsletters or surveys.
       </p>
 
@@ -80,7 +80,7 @@ const PrivacyPolicy = () => {
         6. Cookies
       </p>
       <p className="text-base w-full text-left font-medium text-white mb-8">
-        PdfxPort may use "cookies" to enhance the user experience. Users can
+        PDFXPORT may use "cookies" to enhance the user experience. Users can
         choose to set their web browser to refuse cookies or to alert them when
         cookies are being sent.
       </p>
@@ -89,7 +89,7 @@ const PrivacyPolicy = () => {
         7. Third-Party Links
       </p>
       <p className="text-base w-full text-left font-medium text-white mb-8">
-        PdfxPort may contain links to other websites. We are not responsible for
+        PDFXPORT may contain links to other websites. We are not responsible for
         the content or privacy practices of those sites.
       </p>
       <p className="text-lg w-full text-left font-bold text-white">
@@ -125,12 +125,12 @@ const PrivacyPolicy = () => {
       <p className="text-base w-full text-left font-medium text-white mb-8">
         Beastical Inc.
         <br />
-        [Company Address]
+        9450 Southwest Gemini Drive PMB 64013 Beaverton, OR 97008 US
         <br />
-        [Company Email]
+        dev@beastical.com
       </p>
       <p className="text-base w-full text-center font-medium text-white mb-8">
-        By using PdfxPort, you signify your acceptance of this policy. If you do
+        By using PDFXPORT, you signify your acceptance of this policy. If you do
         not agree to this policy, please do not use our app. Your continued use
         following any changes to this policy will be deemed as your acceptance
         of those changes.

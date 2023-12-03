@@ -4,7 +4,7 @@ const TermOfService = () => {
   return (
     <div className="flex flex-col items-start justify-start w-full my-8 mx-4">
       <p className="text-3xl w-full text-center font-extrabold text-white">
-        Terms of Service for PdfxPort App by Beastical Inc.
+        Terms of Service for PDFXPORT App by Beastical Inc.
       </p>
       <p className="text-lg w-full text-center font-medium text-white mb-8">
         Effective Date: 25th October 2023
@@ -13,17 +13,17 @@ const TermOfService = () => {
         1. Acceptance of Terms
       </p>
       <p className="text-base w-full text-left font-medium text-white mb-8">
-        By accessing or using the PdfxPort app on{" "}
-        <a href="monday.com">Monday.com</a>, you agree to comply with and be
+        By accessing or using the PDFXPORT app on{" "}
+        <a href="monday.com">monday.com</a>, you agree to comply with and be
         bound by these Terms of Service ("Terms"). If you do not agree with
-        these Terms, please refrain from using PdfxPort.
+        these Terms, please refrain from using PDFXPORT.
       </p>
       <p className="text-lg w-full text-left font-bold text-white">
-        2. Use of the PdfxPort App
+        2. Use of the PDFXPORT App
       </p>
       <p className="text-base w-full text-left font-medium text-white mb-8">
         You are granted a limited, non-exclusive, non-transferable license to
-        use PdfxPort for your personal or business purposes in accordance with
+        use PDFXPORT for your personal or business purposes in accordance with
         these Terms.
       </p>
       <p className="text-lg w-full text-left font-bold text-white">
@@ -34,7 +34,7 @@ const TermOfService = () => {
       </p>
       <ul className="list-inside list-disc">
         <li className="text-base w-full text-left font-medium text-white mb-8">
-          You must not use PdfxPort for any illegal or unauthorized purposes.
+          You must not use PDFXPORT for any illegal or unauthorized purposes.
         </li>
         <li className="text-base w-full text-left font-medium text-white mb-8">
           You agree to provide accurate and current information when setting up
@@ -46,7 +46,7 @@ const TermOfService = () => {
       </p>
       <p className="text-base w-full text-left font-medium text-white mb-8">
         Our collection and use of personal data in connection with your use of
-        PdfxPort is as described in our{" "}
+        PDFXPORT is as described in our{" "}
         <a href="#privacy-policy">Privacy Policy</a>.
       </p>
       <p className="text-lg w-full text-left font-bold text-white">
@@ -57,31 +57,31 @@ const TermOfService = () => {
       </p>
       <ul className="list-inside list-disc">
         <li className="text-base w-full text-left font-medium text-white mb-8">
-          Distribute, sublicense, lease, or sell PdfxPort.
+          Distribute, sublicense, lease, or sell PDFXPORT.
         </li>
         <li className="text-base w-full text-left font-medium text-white mb-8">
           Reverse engineer or attempt to extract the source code of our
           software.
         </li>
         <li className="text-base w-full text-left font-medium text-white mb-8">
-          Use PdfxPort for any activity that is illegal or violates the rights
+          Use PDFXPORT for any activity that is illegal or violates the rights
           of others.
         </li>
       </ul>
       <p className="text-lg w-full text-left font-bold text-white">
-        6. Modifications to PdfxPort
+        6. Modifications to PDFXPORT
       </p>
       <p className="text-base w-full text-left font-medium text-white mb-8">
         Beastical Inc. reserves the right to modify or discontinue, temporarily
-        or permanently, the PdfxPort app with or without notice. You agree that
+        or permanently, the PDFXPORT app with or without notice. You agree that
         we shall not be liable to you or any third party for any modification,
-        suspension, or discontinuance of PdfxPort.
+        suspension, or discontinuance of PDFXPORT.
       </p>
       <p className="text-lg w-full text-left font-bold text-white">
         7. Termination
       </p>
       <p className="text-base w-full text-left font-medium text-white mb-8">
-        We may terminate your access to PdfxPort, without cause or notice, which
+        We may terminate your access to PDFXPORT, without cause or notice, which
         may result in the forfeiture and destruction of all information
         associated with your account.
       </p>
@@ -90,7 +90,7 @@ const TermOfService = () => {
         8. Disclaimers
       </p>
       <p className="text-base w-full text-left font-medium text-white mb-8">
-        PdfxPort is provided "as is". Beastical Inc. makes no warranties,
+        PDFXPORT is provided "as is". Beastical Inc. makes no warranties,
         expressed or implied, and hereby disclaims all warranties, including,
         but not limited to, implied warranties of merchantability or fitness for
         a particular purpose.
@@ -104,7 +104,7 @@ const TermOfService = () => {
         special, consequential, or punitive damages, or any loss of profits or
         revenues, whether incurred directly or indirectly, or any loss of data,
         use, goodwill, or other intangible losses, resulting from (a) your use
-        or inability to use PdfxPort; (b) any unauthorized access to or use of
+        or inability to use PDFXPORT; (b) any unauthorized access to or use of
         our servers and/or any personal information stored therein.
       </p>
 
@@ -135,9 +135,9 @@ const TermOfService = () => {
       <p className="text-base w-full text-left font-medium text-white mb-8">
         Beastical Inc.
         <br />
-        [Company Address]
+        9450 Southwest Gemini Drive PMB 64013 Beaverton, OR 97008 US
         <br />
-        [Company Email]
+        dev@beastical.com
       </p>
     </div>
   );
