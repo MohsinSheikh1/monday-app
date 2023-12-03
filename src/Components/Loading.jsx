@@ -47,7 +47,7 @@ const Loading = ({ context, monday }) => {
                 { token: token.data }
               )
               .then((data) => {
-                console.log(data);
+                console.log(JSON.stringify(data));
                 window.location.href = `https://auth.monday.com/oauth2/authorize?client_id=5856e829a851e4cc75bf0b80780176e8&subdomain=${data.accountSlug}&redirect_uri=https://xportpdfmonday.netlify.app/`;
               });
           } else {
