@@ -18,14 +18,21 @@ const App = () => {
   const [context, setContext] = useState();
 
   useEffect(() => {
-    // Notice this method notifies the monday platform that user gains a first value in an app.
-    // Read more about it here: https://developer.monday.com/apps/docs/mondayexecute#value-created-for-user/
-    monday.execute("valueCreatedForUser");
+    if (
+      window.location.pathname === "/privacypolicy" ||
+      window.location.pathname === "/termofservice"
+    ) {
+      return;
+    } else {
+      // Notice this method notifies the monday platform that user gains a first value in an app.
+      // Read more about it here: https://developer.monday.com/apps/docs/mondayexecute#value-created-for-user/
+      monday.execute("valueCreatedForUser");
 
-    // TODO: set up event listeners, Here`s an example, read more here: https://developer.monday.com/apps/docs/mondaylisten/
-    monday.listen("context", (res) => {
-      setContext(res.data);
-    });
+      // TODO: set up event listeners, Here`s an example, read more here: https://developer.monday.com/apps/docs/mondaylisten/
+      monday.listen("context", (res) => {
+        setContext(res.data);
+      });
+    }
   }, []);
 
   //Some example what you can do with context, read more here: https://developer.monday.com/apps/docs/mondayget#requesting-context-and-settings-data
