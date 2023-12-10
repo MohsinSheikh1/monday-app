@@ -1,4 +1,5 @@
-import { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { saveAs } from "file-saver";
@@ -7,6 +8,14 @@ const Export = ({ monday, context }) => {
   const [includeUpdates, setIncludeUpdates] = useState(false);
   const [includeSubItems, setIncludeSubItems] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!context) {
+      navigate("/");
+    } else {
+      return;
+    }
+  }, [context]);
 
   const getPDF = async () => {
     setLoading(true);
@@ -19,9 +28,9 @@ const Export = ({ monday, context }) => {
         .post(url, context, {
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "*"
           },
-          responseType: "blob", // set the response type to blob
+          responseType: "blob" // set the response type to blob
         })
         .then((res) => {
           if (res.data.error === "Invalid Authentication") {
@@ -56,9 +65,9 @@ const Export = ({ monday, context }) => {
         .post(url, context, {
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "*"
           },
-          responseType: "blob", // set the response type to blob
+          responseType: "blob" // set the response type to blob
         })
         .then((res) => {
           if (res.data.error === "Invalid Authentication") {
@@ -166,8 +175,8 @@ const Export = ({ monday, context }) => {
                     state: {
                       subitems: includeSubItems,
                       updates: includeUpdates,
-                      context: context,
-                    },
+                      context: context
+                    }
                   })
                 }
               >
