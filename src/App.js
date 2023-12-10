@@ -22,8 +22,10 @@ const App = () => {
       window.location.pathname === "/privacypolicy" ||
       window.location.pathname === "/termofservice"
     ) {
+      console.log("plink");
       return;
     } else {
+      console.log("link");
       // Notice this method notifies the monday platform that user gains a first value in an app.
       // Read more about it here: https://developer.monday.com/apps/docs/mondayexecute#value-created-for-user/
       monday.execute("valueCreatedForUser");
