@@ -10,6 +10,7 @@ import Scheduling from "./Components/Scheduling";
 import Loading from "./Components/Loading";
 import PrivacyPolicy from "./Components/PrivacyPolicy";
 import TermOfService from "./Components/TermOfService";
+import Json from "./Components/json";
 
 // Usage of mondaySDK example, for more information visit here: https://developer.monday.com/apps/docs/introduction-to-the-sdk/
 const monday = mondaySdk();
@@ -42,7 +43,8 @@ const App = () => {
       <div
         className={`flex items-center justify-center ${
           window.location.pathname === "/privacypolicy" ||
-          window.location.pathname === "/termofservice"
+          window.location.pathname === "/termofservice" ||
+          window.location.pathname === "/monday-app-association.json"
             ? ""
             : "h-screen w-screen"
         }  bg-[#181B34]`}
@@ -63,6 +65,7 @@ const App = () => {
             />
             <Route path="/privacypolicy" element={<PrivacyPolicy />} />
             <Route path="/termofservice" element={<TermOfService />} />
+            <Route path="/monday-app-association.json" element={<Json />} />
           </Routes>
         </Router>
       </div>
