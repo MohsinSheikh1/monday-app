@@ -1,16 +1,25 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Scheduling = ({ monday }) => {
+const Scheduling = ({ monday, context }) => {
   const [inputDate, setInputDate] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!context) {
+      navigate("/");
+    } else {
+      return;
+    }
+  }, [context]);
 
   const handleConversion = async () => {
     const currentDate = new Date();
@@ -23,7 +32,7 @@ const Scheduling = ({ monday }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: "dark"
       });
       return;
     }
@@ -37,7 +46,7 @@ const Scheduling = ({ monday }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: "dark"
       });
       return;
     }
@@ -50,7 +59,7 @@ const Scheduling = ({ monday }) => {
         {
           context: location.state.context,
           time: date.getTime(),
-          email: email,
+          email: email
         }
       )
       .then((res) => {
@@ -76,7 +85,7 @@ const Scheduling = ({ monday }) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: "dark"
         });
         setEmail("");
         setInputDate("");
@@ -93,7 +102,7 @@ const Scheduling = ({ monday }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: "dark"
       });
       return;
     }
@@ -109,7 +118,7 @@ const Scheduling = ({ monday }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: "dark"
       });
       return;
     }
@@ -123,7 +132,7 @@ const Scheduling = ({ monday }) => {
         {
           context: location.state.context,
           time: date.getTime(),
-          email: email,
+          email: email
         }
       )
       .then((res) => {
@@ -149,7 +158,7 @@ const Scheduling = ({ monday }) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: "dark"
         });
         setEmail("");
         setInputDate("");
