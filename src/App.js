@@ -12,7 +12,7 @@ import Loading from "./Components/Loading";
 import PrivacyPolicy from "./Components/PrivacyPolicy";
 import TermOfService from "./Components/TermOfService";
 import Json from "./Components/json";
-// import axios from "axios";
+import axios from "axios";
 import Viewer from "./Components/viewer";
 
 // Usage of mondaySDK example, for more information visit here: https://developer.monday.com/apps/docs/introduction-to-the-sdk/
@@ -23,22 +23,23 @@ const App = () => {
 
   const sessionToken = async () => {
     monday.get("sessionToken").then(async (res) => {
-      console.log(res.data);
       // if token is correct return and if not return 500 internal error
-      // await axios
-      //   .post(`https://pdfxport-k84zo.ondigitalocean.app/api/checkToken`, {
-      //     token: res.data
-      //   })
-      //   .then((data) => {
-      //     if (data.data.accountSlug) {
-      //       return;
-      //     } else {
-      //       return;
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     return;
-      //   });
+      if (res.data) {
+        await axios
+          .post(`https://pdfxport-k84zo.ondigitalocean.app/api/checkToken`, {
+            token: res.data
+          })
+          .then((data) => {
+            if (data.data.valid) {
+              return;
+            } else {
+              throw new Error("Not Authorized");
+            }
+          })
+          .catch((err) => {
+            return;
+          });
+      }
     });
   };
 

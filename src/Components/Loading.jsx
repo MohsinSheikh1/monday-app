@@ -30,7 +30,6 @@ const Loading = ({ context, monday }) => {
   const checkUser = async (userId) => {
     try {
       const token = await monday.get("sessionToken");
-      console.log("Token: " + JSON.stringify(token));
 
       const account_id = context.account.id;
 
