@@ -53,9 +53,10 @@ const App = () => {
       monday.execute("valueCreatedForUser");
 
       // TODO: set up event listeners, Here`s an example, read more here: https://developer.monday.com/apps/docs/mondaylisten/
-      monday.listen("context", (res) => {
-        setContext(res.data);
-      });
+      monday.listen("context").then((res) => setContext(res.data));
+      // monday.listen("context", (res) => {
+      //   setContext(res.data);
+      // });
     }
   }, []);
 
