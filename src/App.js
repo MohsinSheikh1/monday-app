@@ -41,6 +41,16 @@ const App = () => {
     });
   }, []);
 
+  const mondayContext = async () => {
+    monday.execute("valueCreatedForUser");
+
+    // TODO: set up event listeners, Here`s an example, read more here: https://developer.monday.com/apps/docs/mondaylisten/
+    // monday.listen("context").then((res) => setContext(res.data));
+    await monday.listen("context", (res) => {
+      setContext(res.data);
+    });
+  };
+
   useEffect(() => {
     if (
       window.location.pathname === "/privacypolicy" ||
@@ -50,13 +60,7 @@ const App = () => {
     } else {
       // Notice this method notifies the monday platform that user gains a first value in an app.
       // Read more about it here: https://developer.monday.com/apps/docs/mondayexecute#value-created-for-user/
-      monday.execute("valueCreatedForUser");
-
-      // TODO: set up event listeners, Here`s an example, read more here: https://developer.monday.com/apps/docs/mondaylisten/
-      monday.listen("context").then((res) => setContext(res.data));
-      // monday.listen("context", (res) => {
-      //   setContext(res.data);
-      // });
+      mondayContext();
     }
   }, []);
 
