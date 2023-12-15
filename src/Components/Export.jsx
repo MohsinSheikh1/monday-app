@@ -10,7 +10,7 @@ const Export = ({ monday, context }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!context || context?.user.isViewOnly) {
+    if (context?.user.isViewOnly) {
       navigate("/viewer");
     } else {
       return;

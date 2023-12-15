@@ -14,7 +14,7 @@ const Scheduling = ({ monday, context }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!context || context?.user.isViewOnly) {
+    if (context?.user.isViewOnly) {
       navigate("/viewer");
     } else {
       return;

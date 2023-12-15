@@ -78,8 +78,6 @@ const Loading = ({ context, monday }) => {
         };
         getUser(queryParameters);
       }
-    } else {
-      navigate("/viewer");
     }
   }, [context]);
 
