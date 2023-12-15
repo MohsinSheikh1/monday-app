@@ -17,7 +17,7 @@ const Loading = ({ context, monday }) => {
         .post("https://pdfxport-k84zo.ondigitalocean.app/api/user", {
           code: code,
           id: userId,
-          account_id: account_id,
+          account_id: account_id
         })
         .then(() => {
           navigate("/export");
@@ -64,16 +64,22 @@ const Loading = ({ context, monday }) => {
 
   useEffect(() => {
     if (context) {
-      const queryParameters = new URLSearchParams(window.location.search);
-      const userId = context.user.id;
-      const getUser = async (queryParameters) => {
-        if (queryParameters.get("code")) {
-          apiKey(queryParameters, userId);
-        } else {
-          checkUser(userId);
-        }
-      };
-      getUser(queryParameters);
+      if (context?.user.isViewOnly) {
+        navigate("/viewer");
+      } else {
+        const queryParameters = new URLSearchParams(window.location.search);
+        const userId = context.user.id;
+        const getUser = async (queryParameters) => {
+          if (queryParameters.get("code")) {
+            apiKey(queryParameters, userId);
+          } else {
+            checkUser(userId);
+          }
+        };
+        getUser(queryParameters);
+      }
+    } else {
+      navigate("/viewer");
     }
   }, [context]);
 

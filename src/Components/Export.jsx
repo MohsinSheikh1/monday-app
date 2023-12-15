@@ -6,12 +6,12 @@ import { saveAs } from "file-saver";
 
 const Export = ({ monday, context }) => {
   const [includeUpdates, setIncludeUpdates] = useState(false);
-  const [includeSubItems, setIncludeSubItems] = useState(false);
+  // const [includeSubItems, setIncludeSubItems] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!context) {
-      navigate("/");
+    if (!context || context?.user.isViewOnly) {
+      navigate("/viewer");
     } else {
       return;
     }
@@ -19,10 +19,11 @@ const Export = ({ monday, context }) => {
 
   const getPDF = async () => {
     setLoading(true);
-    const updates = includeSubItems ? "true" : "false";
-    const subitems = includeSubItems ? "true" : "false";
+    const updates = includeUpdates ? "true" : "false";
+    // const subitems = includeSubItems ? "true" : "false";
 
-    const url = `https://pdfxport-k84zo.ondigitalocean.app/api/pdf?includeSubitems=${subitems}&includeUpdates=${updates}`;
+    // const url = `https://pdfxport-k84zo.ondigitalocean.app/api/pdf?includeSubitems=${subitems}&includeUpdates=${updates}`;
+    const url = `https://pdfxport-k84zo.ondigitalocean.app/api/pdf?includeUpdates=${updates}`;
     try {
       await axios
         .post(url, context, {
@@ -56,10 +57,11 @@ const Export = ({ monday, context }) => {
   };
   const wholeBoard = async () => {
     setLoading(true);
-    const updates = includeSubItems ? "true" : "false";
-    const subitems = includeSubItems ? "true" : "false";
+    const updates = includeUpdates ? "true" : "false";
+    // const subitems = includeSubItems ? "true" : "false";
 
-    const url = `https://pdfxport-k84zo.ondigitalocean.app/api/pdf?includeSubitems=${subitems}&includeUpdates=${updates}&wholeBoard=true`;
+    // const url = `https://pdfxport-k84zo.ondigitalocean.app/api/pdf?includeSubitems=${subitems}&includeUpdates=${updates}&wholeBoard=true`;
+    const url = `https://pdfxport-k84zo.ondigitalocean.app/api/pdf?includeUpdates=${updates}&wholeBoard=true`;
     try {
       await axios
         .post(url, context, {
@@ -122,7 +124,7 @@ const Export = ({ monday, context }) => {
                     Include Updates
                   </label>
                 </div>
-                <div className="flex items-center justify-start gap-4 w-full">
+                {/* <div className="flex items-center justify-start gap-4 w-full">
                   <input
                     type="checkbox"
                     id="include-subitems"
@@ -135,7 +137,7 @@ const Export = ({ monday, context }) => {
                   <label htmlFor="include-subitems" className="text-white">
                     Include Subitems
                   </label>
-                </div>
+                </div> */}
                 {/* <div className="flex items-center justify-start gap-4 w-full">
               <input
                 type="checkbox"
@@ -173,7 +175,7 @@ const Export = ({ monday, context }) => {
                 onClick={() =>
                   navigate("/schedule", {
                     state: {
-                      subitems: includeSubItems,
+                      // subitems: includeSubItems,
                       updates: includeUpdates,
                       context: context
                     }

@@ -14,8 +14,8 @@ const Scheduling = ({ monday, context }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!context) {
-      navigate("/");
+    if (!context || context?.user.isViewOnly) {
+      navigate("/viewer");
     } else {
       return;
     }
@@ -55,7 +55,8 @@ const Scheduling = ({ monday, context }) => {
 
     await axios
       .post(
-        `https://pdfxport-k84zo.ondigitalocean.app/api/pdf/schedule?includeSubitems=${location.state.subitems}&includeUpdates=${location.state.updates}`,
+        `https://pdfxport-k84zo.ondigitalocean.app/api/pdf/schedule?includeUpdates=${location.state.updates}`,
+        // `https://pdfxport-k84zo.ondigitalocean.app/api/pdf/schedule?includeSubitems=${location.state.subitems}&includeUpdates=${location.state.updates}`,
         {
           context: location.state.context,
           time: date.getTime(),
@@ -128,7 +129,8 @@ const Scheduling = ({ monday, context }) => {
 
     await axios
       .post(
-        `https://pdfxport-k84zo.ondigitalocean.app/api/pdf/schedule?includeSubitems=${location.state.subitems}&includeUpdates=${location.state.updates}&wholeBoard=true`,
+        `https://pdfxport-k84zo.ondigitalocean.app/api/pdf/schedule?includeUpdates=${location.state.updates}&wholeBoard=true`,
+        // `https://pdfxport-k84zo.ondigitalocean.app/api/pdf/schedule?includeSubitems=${location.state.subitems}&includeUpdates=${location.state.updates}&wholeBoard=true`,
         {
           context: location.state.context,
           time: date.getTime(),

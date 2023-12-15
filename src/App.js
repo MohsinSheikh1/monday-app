@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -11,12 +12,34 @@ import Loading from "./Components/Loading";
 import PrivacyPolicy from "./Components/PrivacyPolicy";
 import TermOfService from "./Components/TermOfService";
 import Json from "./Components/json";
+import axios from "axios";
+import Viewer from "./Components/viewer";
 
 // Usage of mondaySDK example, for more information visit here: https://developer.monday.com/apps/docs/introduction-to-the-sdk/
 const monday = mondaySdk();
 
 const App = () => {
   const [context, setContext] = useState();
+
+  useEffect(() => {
+    monday.get("sessionToken").then((res) => {
+      // if token is correct return and if not return 500 internal error
+      axios
+        .post(`https://pdfxport-k84zo.ondigitalocean.app/api/accountSlug`, {
+          token: res
+        })
+        .then((data) => {
+          if (data.data.accountSlug) {
+            return;
+          } else {
+            return;
+          }
+        })
+        .catch((err) => {
+          return;
+        });
+    });
+  }, []);
 
   useEffect(() => {
     if (
@@ -65,6 +88,7 @@ const App = () => {
             />
             <Route path="/privacypolicy" element={<PrivacyPolicy />} />
             <Route path="/termofservice" element={<TermOfService />} />
+            <Route path="/viewer" element={<Viewer />} />
             <Route path="/monday-app-association.json" element={<Json />} />
           </Routes>
         </Router>
